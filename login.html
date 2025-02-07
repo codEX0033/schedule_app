@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в аккаунт</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h1>Вход в аккаунт</h1>
+        <form id="loginForm">
+            <input type="text" placeholder="Логин" id="login" required>
+            <input type="password" placeholder="Пароль" id="password" required>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+        <p class="register-link">Нет аккаунта? <a href="/register.html">Зарегистрируйтесь</a></p>
+        <button class="admin-btn" onclick="window.location.href='/admin'">Войти как администратор</button>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html> 

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Установить приложение</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#00B0FF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        body {
+            background-color: #00B0FF;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .install-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #00B0FF;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .install-btn {
+            background-color: #00B0FF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            width: 100%;
+        }
+
+        .install-btn:hover {
+            opacity: 0.9;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .app-icon {
+            width: 96px;
+            height: 96px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="install-container">
+        <img src="icon-192.png" alt="App Icon" class="app-icon">
+        <h1>Установить приложение расписания</h1>
+        <p>Установите наше приложение для быстрого доступа к расписанию без открытия браузера</p>
+        <button id="installButton" class="install-btn">Установить приложение</button>
+        <div id="instructions" class="instructions">
+            <p>Для установки в браузере:</p>
+            <p>1. Нажмите на меню (три точки)</p>
+            <p>2. Выберите "Установить приложение"</p>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(registration => console.log('ServiceWorker registered'))
+                .catch(err => console.log('ServiceWorker registration failed: ', err));
+        }
+
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            window.location.href = '/register';
+        }
+
+        let deferredPrompt;
+        const installButton = document.getElementById('installButton');
+        const instructions = document.getElementById('instructions');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.style.display = 'block';
+        });
+
+        installButton.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    console.log('Приложение установлено');
+                    setTimeout(() => {
+                        window.location.href = '/register';
+                    }, 1000);
+                }
+                deferredPrompt = null;
+            } else {
+                instructions.style.display = 'block';
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            window.location.href = '/register';
+        });
+    </script>
+</body>
+</html> 

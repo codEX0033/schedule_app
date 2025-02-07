@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row class">
+            <button class="button-orange">5</button>
+            <button class="button-orange">6</button>
+            <button class="button-orange">7</button>
+            <button class="button-orange">8</button>
+            <button class="button-orange">9</button>
+            <button class="button-orange">10</button>
+            <button class="button-orange">11</button>
+        </div>
+
+        <div class="row litera">
+            <button class="button-red">А</button>
+            <button class="button-red">Б</button>
+            <button class="button-red">В</button>
+            <button class="button-red">Г</button>
+            <button class="button-red">Д</button>
+        </div>
+
+        <div class="row day">
+            <button class="button-blue">Пн</button>
+            <button class="button-blue">Вт</button>
+            <button class="button-blue">Ср</button>
+            <button class="button-blue">Чт</button>
+            <button class="button-blue">Пт</button>
+        </div>
+
+        <div class="row get-schedule-button">
+            <button class="button-blue-outline">Получить расписание</button>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Номер урока</th>
+                    <th>Урок</th>
+                    <th>Время</th>
+                    <th>Кабинет</th>
+                </tr>
+            </thead>
+            <tbody id="scheduleBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

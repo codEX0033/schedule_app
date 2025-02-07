@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div id="loginForm" class="admin-login">
+        <h1>Вход для администратора</h1>
+        <form id="adminLoginForm">
+            <input type="text" placeholder="Логин" id="adminLogin" required>
+            <input type="password" placeholder="Пароль" id="adminPassword" required>
+            <button type="submit" class="submit-btn">Войти</button>
+        </form>
+    </div>
+
+    <div id="adminPanel" class="admin-container" style="display: none;">
+        <h1>Панель администратора</h1>
+        
+        <div class="upload-section">
+            <h2>Загрузка расписания</h2>
+            <div class="upload-form">
+                <select id="daySelect" required>
+                    <option value="">Выберите день недели</option>
+                    <option value="monday">Понедельник</option>
+                    <option value="tuesday">Вторник</option>
+                    <option value="wednesday">Среда</option>
+                    <option value="thursday">Четверг</option>
+                    <option value="friday">Пятница</option>
+                </select>
+                <input type="file" id="scheduleFile" accept=".xlsx" required>
+                <button onclick="uploadSchedule()" class="upload-btn">Загрузить расписание</button>
+            </div>
+        </div>
+
+        <div class="requests-container">
+            <h2>Заявки на регистрацию</h2>
+            <div id="requestsList"></div>
+        </div>
+    </div>
+    <script src="admin.js"></script>
+</body>
+</html> 
